@@ -39,7 +39,7 @@ class LoginController extends Controller
     }
 
 
-    // Override the username method from Authenticatesuser trait to modify login process
+    // Override the username method from AuthenticatesUsers trait to modify login process
     public function username()
     {
         $login = request()->input('telephone');

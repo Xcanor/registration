@@ -71,7 +71,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" autocomplete="gender">
 
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                             <label for="Date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date Of Birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Date_of_birth" type="text" class="form-control @error('Date_of_birth') is-invalid @enderror" name="Date_of_birth" value="{{ old('Date_of_birth') }}" required autocomplete="Date_of_birth">
+                                <input id="Date_of_birth" type="text" class="form-control @error('Date_of_birth') is-invalid @enderror" name="Date_of_birth" value="{{ old('Date_of_birth') }}" autocomplete="Date_of_birth">
 
                                 @error('Date_of_birth')
                                     <span class="invalid-feedback" role="alert">
