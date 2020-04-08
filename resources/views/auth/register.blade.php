@@ -71,7 +71,10 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                             <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" autocomplete="gender">
+                                <select id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" autocomplete="gender">
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
+                                </select>
 
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -82,12 +85,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date Of Birth') }}</label>
+                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date Of Birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Date_of_birth" type="text" class="form-control @error('Date_of_birth') is-invalid @enderror" name="Date_of_birth" value="{{ old('Date_of_birth') }}" autocomplete="Date_of_birth">
+                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="date_of_birth">
 
-                                @error('Date_of_birth')
+                                @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

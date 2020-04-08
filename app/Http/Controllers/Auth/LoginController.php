@@ -42,11 +42,11 @@ class LoginController extends Controller
     // Override the username method from AuthenticatesUsers trait to modify login process
     public function username()
     {
-        $login = request()->input('telephone');
+        $user_identifier = request()->input('telephone');
 
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'telephone';
+        $field = filter_var($user_identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'telephone';
 
-        request()->merge([$field => $login]);
+        request()->merge([$field => $user_identifier]);
 
         return $field;
     }
