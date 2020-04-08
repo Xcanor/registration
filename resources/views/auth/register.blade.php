@@ -69,8 +69,8 @@
 
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
-
-                            <div class="col-md-6">
+                            <!-- MUST BE DROP DOWN LIST (MALE/FEMALE) -->
+                            <div class="col-md-6">  
                                 <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" autocomplete="gender">
 
                                 @error('gender')
@@ -83,7 +83,7 @@
 
                         <div class="form-group row">
                             <label for="Date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date Of Birth') }}</label>
-
+                            <!-- MUST BE DATE INPUT TYPE  -->
                             <div class="col-md-6">
                                 <input id="Date_of_birth" type="text" class="form-control @error('Date_of_birth') is-invalid @enderror" name="Date_of_birth" value="{{ old('Date_of_birth') }}" autocomplete="Date_of_birth">
 
