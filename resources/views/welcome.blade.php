@@ -70,15 +70,14 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
+                        <a href="{{ route('loginUserForm') }}">Login as user</a>
+                        <a href="{{ route('loginForm') }}">Login as admin</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('registerUserFrom') }}">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
-
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
