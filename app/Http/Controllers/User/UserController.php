@@ -22,6 +22,7 @@ class UserController extends Controller
 
     protected function createUser(Request $request)
     {
+        // first we validate inputs from request (Register Form)
         
         $this->validate($request, [
             'first_name' => 'required',

@@ -16,6 +16,13 @@
                     
                     You are logged in!
                 </div>
+                <div>
+                    <div class="col-md-6 col-md-offset-4 mt-4">
+                        <button type="submit" onclick="location.href='{{ url('user/changepassword') }}'">
+                            Change Password
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

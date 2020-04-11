@@ -11,5 +11,12 @@
     
     <h1>Number Of Total users in this system : {{ $users->count() }} </h1>
     
+        <div>
+            <div class="col-md-6 col-md-offset-4">
+                <button type="submit" onclick="location.href='{{ url('admin/changepassword') }}'">
+                    Change Password
+                </button>
+            </div>
+        </div>
 </body>
 </html>
