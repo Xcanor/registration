@@ -26,7 +26,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                    <form class="form-horizontal" method="POST" action="{{ route('changepassword') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('changePassword') }}">
                         @csrf
 
                         <div class="form-group @error('current-password') is-invalid @enderror">

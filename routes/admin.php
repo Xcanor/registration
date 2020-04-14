@@ -1,37 +1,29 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::Routes();
 
-// Admin Routes for Login Process
 
-Route::get('admin/login', 'Admin\AdminController@showAdminLoginForm')->name('loginForm');
+Route::namespace('Admin')->group(function(){
 
-Route::post('admin/login', 'Admin\AdminController@adminLogin');
+    // Admin Routes for Login Process
 
-// Routes Where admin will be able to access them if he authenticated 
+    Route::get('login', 'AdminLoginController@showLoginForm')->name('loginForm');
 
-Route::group(['middleware' => ['admin']], function () {
+    Route::post('login', 'AdminLoginController@Login');
 
-    Route::post('admin/changepassword' , 'Admin\ChangePasswordController@ChangePassword');
 
-    Route::get('admin/changepassword' , 'Admin\ChangePasswordController@showChangePasswordForm')->name('changepassword');
+    // Routes Where admin will be able to access them if he authenticated 
 
-    Route::get('admin/dashboard' , function(){
-            return view('auth.admin.dashboard',[
-                'admins' => App\Admin::all()],[
-                'users' => App\User::all()]);
-            });
+    Route::group(['middleware' => ['admin_auth']], function () {
+
+        Route::post('changepassword' , 'ChangePasswordController@ChangePassword');
+
+        Route::get('changepassword' , 'ChangePasswordController@showChangePasswordForm')->name('changePassword');
+
+        Route::get('dashboard','AdminHomeController@index');
+    });
+
 });
-
-
-
-
-
 
 ?>

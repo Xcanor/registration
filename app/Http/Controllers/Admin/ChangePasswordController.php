@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Admin;
 
+
 class ChangePasswordController extends Controller
 {
     public function showChangePasswordForm()
@@ -23,6 +24,7 @@ class ChangePasswordController extends Controller
             // The passwords not matches
             return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
         }
+        
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
             //Current password and new password are same
             return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");

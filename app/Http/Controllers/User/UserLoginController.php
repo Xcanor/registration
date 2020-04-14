@@ -9,18 +9,23 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 
 
-class UserController extends Controller
+class UserLoginController extends Controller
 {
-    public function showUserRegisterForm()
+    use AuthenticatesUsers;
+
+    // Show register form to user
+    public function showRegisterForm()
     {
         return view('auth.user.register-user');
     }
-    public function showUserLoginForm()
+
+    // Show login form to user
+    public function showLoginForm()
     {
         return view('auth.user.login-user');
     }
 
-    protected function createUser(Request $request)
+    protected function create(Request $request)
     {
         // first we validate inputs from request (Register Form)
         
@@ -47,20 +52,30 @@ class UserController extends Controller
         return redirect('user/login');
     }
 
-    public function userLogin(Request $request)
+    // Login Process
+    public function Login(Request $request)
     {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-
-        $user_email = $request->email;
+        $user_identification = $request->telephone;
         $user_password = $request->password;
 
-        if (Auth::guard('web')->attempt(['email' => $user_email, 'password' => $user_password])) {
+        if (Auth::guard('web')->attempt([$this->username() => $user_identification, 'password' => $user_password])) {
 
-            return redirect('home');
+            return redirect('user/home');
         }
-        return back()->withInput($request->only('email'));
+        return back();
     }
+
+    public function username()
+    
+    {
+        $user_identifier = request()->input('telephone');
+
+        $field = filter_var($user_identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'telephone';
+
+        request()->merge([$field => $user_identifier]);
+
+        return $field;
+    }
+
+
 }
