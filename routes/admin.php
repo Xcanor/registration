@@ -21,7 +21,22 @@ Route::namespace('Admin')->group(function(){
 
         Route::get('changepassword' , 'ChangePasswordController@showChangePasswordForm')->name('changePassword');
 
-        Route::get('dashboard','AdminHomeController@index');
+        // Routes for Administration Management
+        Route::get('pages/dashboard','AdminHomeController@index');
+
+        Route::get('pages/dashboard/{userId}', 'AdminManagementController@show');
+
+        Route::get('createUser', 'AdminManagementController@create')->name('AddUser');
+
+        Route::post('createUser', 'AdminManagementController@store');
+
+        Route::get('pages/dashboard/{userId}/edit', 'AdminManagementController@edit');
+
+        Route::put('pages/dashboard/{userId}', 'AdminManagementController@update')->name('UpdateUser');
+
+        Route::delete('pages/dashboard/{userId}','AdminManagementController@destroy');
+
+        Route::get('/status/update' , 'AdminManagementController@updateStatus')->name('users.update.status');
     });
 
 });

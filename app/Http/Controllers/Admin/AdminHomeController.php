@@ -11,9 +11,10 @@ class AdminHomeController extends Controller
 {
     public function index()
     {   
-        $admins = Admin::all();
         $users = User::all();
 
-        return view('auth.admin.dashboard',compact('admins','users'));
+        return view('auth.admin.pages.dashboard',compact('users'));
     }
+
+ 
 }

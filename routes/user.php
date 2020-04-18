@@ -1,11 +1,10 @@
 <?php
 
+// test for template 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::view('/home', 'HomeController@index')->middleware('auth');
 
 Auth::Routes();
 
@@ -25,6 +24,17 @@ Route::namespace('User')->group(function(){
             Route::get('home' ,function (){
                 return view('home');
             });
+
+            // Routes For the profile of the user
+            Route::get('profile' , 'UserHomeController@showprofile');
+
+            Route::get('profile/{userId}/edit', 'UserHomeController@edit');
+
+            Route::put('profile/{userId}', 'UserHomeController@update')->name('UpdateUserr');
+
+            Route::get('profile/photo', 'UserHomeController@changephoto')->name('uploadphoto');
+
+            Route::post('profile/photo', 'UserHomeController@update_avatar');
           
         });
     

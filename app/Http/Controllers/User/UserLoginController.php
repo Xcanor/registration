@@ -36,6 +36,7 @@ class UserLoginController extends Controller
             'telephone' => 'required|numeric',
             'gender' => 'nullable',
             'date_of_birth' => 'nullable',
+            'status' => 'required',
             'password' => 'required|min:6'
         ]);
         
@@ -46,6 +47,7 @@ class UserLoginController extends Controller
             'telephone' => $request['telephone'],
             'gender' => $request['gender'],
             'date_of_birth' => $request['date_of_birth'],
+            'status' => $request['status'],
             'password' => Hash::make($request['password']),
         ]);
 
@@ -60,7 +62,7 @@ class UserLoginController extends Controller
 
         if (Auth::guard('web')->attempt([$this->username() => $user_identification, 'password' => $user_password])) {
 
-            return redirect('user/home');
+            return redirect('user/profile');
         }
         return back();
     }

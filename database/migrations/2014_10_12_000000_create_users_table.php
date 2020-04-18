@@ -21,10 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('telephone')->unique();
             $table->enum('gender',array('male','female'))->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->boolean('status')->default(1);
+            $table->string('avatar')->default('default.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
