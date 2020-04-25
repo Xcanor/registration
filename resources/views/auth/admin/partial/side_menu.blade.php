@@ -34,9 +34,17 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="/admin/dashboard/users" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>User Managements</p>
+                </a>
+                <a href="/admin/dashboard/agency" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Offer Management</p>
+                </a>
+                <a href="/admin/dashboard/category" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category Management</p>
                 </a>
               </li>
             </ul>

@@ -46,7 +46,7 @@
       $(document).ready(function(){
         $('.js-switch').change(function () {
           let status = $(this).prop('checked') === true ? 1 : 0; // checked property in the input toggle button
-          let userId = $(this).data('id');   // 
+          let userId = $(this).data('id');   
           $.ajax({
             type: "GET",
             dataType: "json",
@@ -57,6 +57,35 @@
               }
           });
         });
+
+        $('.js-switch').change(function () {
+          let available = $(this).prop('checked') === true ? 1 : 0; // checked property in the input toggle button
+          let agencyId = $(this).data('aid');   
+          $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('agencies.update.status') }}',
+            data: {'status': available, 'agency_id': agencyId},
+            success: function (data) {
+              console.log(data.message);
+              }
+          });
+        });
+
+        $('.js-switch').change(function () {
+          let available = $(this).prop('checked') === true ? 1 : 0; // checked property in the input toggle button
+          let offerId = $(this).data('oid');   
+          $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('offers.update.status') }}',
+            data: {'status': available, 'offer_id': offerId},
+            success: function (data) {
+              console.log(data.message);
+              }
+          });
+        });
+
       });
 </script>
 

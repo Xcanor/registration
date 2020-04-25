@@ -48,6 +48,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapUserRoutes();
 
+        $this->mapTouristAgenciesRoutes();
+
+        $this->mapCategoriesRoutes();
+
         //
     }
 
@@ -92,6 +96,21 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/user.php'));
+    }
+
+    protected function mapTouristAgenciesRoutes()
+    {
+        Route::prefix('agency')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/touristAgencies.php'));
+    }
+
+    protected function mapCategoriesRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/category.php'));
     }
 
         

@@ -71,6 +71,7 @@
                     @else
                         <a href="{{ route('loginUserForm') }}">Login as user</a>
                         <a href="{{ route('loginForm') }}">Login as admin</a>
+                        <a href="{{ route('loginagency') }}">Login as agency</a>
                         @if (Route::has('register'))
                             <a href="{{ route('registerUserFrom') }}">Register</a>
                         @endif

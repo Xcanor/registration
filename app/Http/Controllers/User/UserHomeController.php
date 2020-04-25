@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Offer;
+use App\Agency;
 use Image;
 
 class UserHomeController extends Controller
@@ -71,6 +73,19 @@ class UserHomeController extends Controller
     	}
 
     	return redirect('/user/profile');
+    }
+
+    public function showOffers()
+    {   
+        $agencies = Agency::all();
+        $offers = Offer::all();
+        return view('auth.user.pages.offers',compact('offers','agencies'));
+    }
+
+    public function showdetails($offerId)
+    {
+        $offer = Offer::findOrFail($offerId);
+        return view('auth.user.pages.show-details', compact('offer'));
     }
 
 }

@@ -21,13 +21,34 @@
             <td>
             <input type="checkbox" data-id="{{ $user->id }}" name="status" class="js-switch" {{ $user->status == 1 ? 'checked' : '' }}>
             </td>
+            
             <td>
-                <a href="dashboard/{{ $user->id }}">Read</a> 
-                <a href="dashboard/{{ $user->id }}/edit">Update</a>
-               <form method="POST" action="dashboard/{{ $user->id }}">
+                <a href="users/{{ $user->id }}">Read</a> 
+                <a href="users/{{ $user->id }}/edit">Update</a>
+               <form method="POST" action="users/{{ $user->id }}">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="btn btn-primary" value="delete">
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                </form>
+            </td>
+           
+          </tr>
+          @endforeach
+          @foreach ($agencies as $agency)
+          <tr>
+            <td>{{ $agency->id }}</td>
+            <td>{{ $agency->name }}</td>
+            <td>{{ $agency->email }}</td>
+            <td>
+            <input type="checkbox" data-aid="{{ $agency->id }}" name="status" class="js-switch" {{ $agency->status == 1 ? 'checked' : '' }}>
+            </td>
+            <td>
+                <a href="agencies/{{ $agency->id }}">Read</a> 
+                <a href="agencies/{{ $agency->id }}/edit">Update</a>
+               <form method="POST" action="agencies/{{ $agency->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-primary" value="Delete">
                 </form>
             </td>
            

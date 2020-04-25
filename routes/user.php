@@ -35,6 +35,10 @@ Route::namespace('User')->group(function(){
             Route::get('profile/photo', 'UserHomeController@changephoto')->name('uploadphoto');
 
             Route::post('profile/photo', 'UserHomeController@update_avatar');
+
+            Route::get('offers', 'UserHomeController@showOffers');
+
+            Route::get('details/{offerId}', 'UserHomeController@showDetails');
           
         });
     

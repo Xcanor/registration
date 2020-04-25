@@ -11,9 +11,15 @@ class MailObserver
     // Once the user is created he will recevie welcome mail message
         
     public function created(User $user)
-    {
-        $user_email = $user->email;
+    {   
+        if(!(request()->is("admin*")))
         
-        Mail::to($user_email)->send(new WelcomeEmail($user));
+        {
+            $user_email = $user->email;
+        
+            Mail::to($user_email)->send(new WelcomeEmail($user));
+        }
+
+       
     }
 }

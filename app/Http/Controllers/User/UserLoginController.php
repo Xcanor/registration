@@ -62,7 +62,7 @@ class UserLoginController extends Controller
 
         if (Auth::guard('web')->attempt([$this->username() => $user_identification, 'password' => $user_password])) {
 
-            return redirect('user/profile');
+            return redirect('user/offers');
         }
         return back();
     }

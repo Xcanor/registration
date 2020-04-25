@@ -103,8 +103,9 @@
 
                             <div class="col-md-6">
                                 <select id="status" type="text" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ $user->status }} autocomplete="status">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
+                                    <option value="1">active</option>
+                                    <option value="0">deactive</option>
+                                    
                                 </select>
 
                                 @error('status')
