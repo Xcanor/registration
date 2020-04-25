@@ -31,6 +31,10 @@ Route::namespace('Agency')->group(function(){
 
         Route::get('dashboard/details/{offerId}','AgencyManagementController@showdetails')->name('show_detail');
 
+        Route::get('dashboard/details/{detailId}/edit','AgencyManagementController@editDetails');
+
+        Route::put('dashboard/details/{detailId}', 'AgencyManagementController@updateDetails')->name('UpdateDetails');
+
     
 
 

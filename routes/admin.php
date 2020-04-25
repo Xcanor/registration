@@ -94,6 +94,10 @@ Route::namespace('Admin')->group(function(){
             Route::post('agency/{offerId}/add','AdminAgencyManagementController@save');
 
             Route::get('agency/details/{offerId}','AdminAgencyManagementController@showDetails');
+
+            Route::get('agency/details/{detailId}/edit','AdminAgencyManagementController@editDetails');
+
+            Route::put('agency/details/{detailId}', 'AdminAgencyManagementController@updateDetails')->name('UpdateDetail');
         });
         
 

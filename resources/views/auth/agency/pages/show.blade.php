@@ -41,7 +41,6 @@
             <td>{{ $offer->user_price }}</td>
             <td>
             <a href="details/{{ $offer->id }}">Details</a><br>
-            <a href="#">Add Category</a>
             </td>
           </tr>
         </tbody>

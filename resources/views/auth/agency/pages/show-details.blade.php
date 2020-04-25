@@ -11,6 +11,7 @@
             <th>Arrival Time</th>
             <th>Ticket Number</th>
             <th>Transportation</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
             <td>{{ date('l , F d , Y h:i A', strtotime($detail->arrival_time)) }}</td>
             <td>{{ $detail->ticket_number }}</td>
             <td>{{ $detail->transportation }}</td>
+            <td><a href="{{ $detail->id }}/edit">Edit</a><br></td>
           </tr>
           @endforeach
         </tbody>

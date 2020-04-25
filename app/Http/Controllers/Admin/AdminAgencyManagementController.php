@@ -161,6 +161,37 @@ class AdminAgencyManagementController extends Controller
         return view('auth.admin.pages.show-details', compact('offer'));
     }
 
+    public function editDetails($detailId)
+    {
+        $detail = Detail::findOrFail($detailId);
+        return view('auth.admin.pages.edit-details', compact('detail'));
+    }
+
+    public function updateDetails(Request $request)
+    {
+        $detail = Detail::findOrFail($request->detailId);
+
+        $this->validate($request, [
+            'from' => 'required',
+            'to' => 'required',
+            'departial_time' => 'required',
+            'arrival_time' => 'required',
+            'ticket_number' => 'required|numeric',
+            'transportation' => 'required',
+        ]);
+        // save new values
+        $detail -> from = $request -> from;
+        $detail -> to = $request -> to;
+        $detail -> departial_time = $request -> departial_time;
+        $detail -> arrival_time = $request -> arrival_time;
+        $detail -> ticket_number = $request -> ticket_number;
+        $detail -> transportation = $request -> transportation;
+        $detail -> save();
+
+
+        return redirect('admin/dashboard/agency');
+    }
+
     public function updateStatusOffer(Request $request)
     {
         $offer = Offer::findOrFail($request->offer_id);
