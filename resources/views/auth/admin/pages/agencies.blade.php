@@ -13,27 +13,6 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($users as $user)
-          <tr>
-            <td>{{ $user->id }}</td>
-            <td>{{ $user->first_name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>
-            <input type="checkbox" data-id="{{ $user->id }}" name="status" class="js-switch" {{ $user->status == 1 ? 'checked' : '' }}>
-            </td>
-            
-            <td>
-                <a href="users/{{ $user->id }}">Read</a> 
-                <a href="users/{{ $user->id }}/edit">Update</a>
-               <form method="POST" action="users/{{ $user->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" class="btn btn-primary" value="Delete">
-                </form>
-            </td>
-           
-          </tr>
-          @endforeach
           @foreach ($agencies as $agency)
           <tr>
             <td>{{ $agency->id }}</td>
@@ -51,7 +30,6 @@
                     <input type="submit" class="btn btn-primary" value="Delete">
                 </form>
             </td>
-           
           </tr>
           @endforeach
         </tbody>

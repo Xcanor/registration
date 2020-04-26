@@ -24,9 +24,13 @@ Route::namespace('Admin')->group(function(){
         // Routes for Administration Management
         Route::get('dashboard','AdminHomeController@welcome');
 
-        Route::get('dashboard/agency','AdminHomeController@showAgencyPanel');
+        Route::get('dashboard/offer','AdminHomeController@showOffers');
         
-        Route::get('dashboard/users','AdminHomeController@index');
+        Route::get('dashboard/users','AdminHomeController@showUsers');
+
+        Route::get('dashboard/agency','AdminHomeController@showAgencies');
+
+        
 
              
         // Routes for Users (Normall) Managemrnt
@@ -46,42 +50,43 @@ Route::namespace('Admin')->group(function(){
         
 
         // Routes For Offer Management
-        Route::get('dashboard/agency/{offerId}', 'AdminAgencyManagementController@viewOffer');
+        Route::get('dashboard/offer/{offerId}', 'OffersController@viewOffer');
 
-        Route::get('createoffer','AdminAgencyManagementController@create')->name('createofferr');
+        Route::get('createoffer','OffersController@create')->name('createofferr');
 
-        Route::post('createoffer','AdminAgencyManagementController@storeoffer');
+        Route::post('createoffer','OffersController@storeoffer');
 
         Route::group(['prefix' => 'dashboard'], function () {
 
-            Route::get('agency/{offerId}/edit', 'AdminAgencyManagementController@edit');
+            Route::get('offer/{offerId}/edit', 'OffersController@edit');
 
-            Route::put('agency/{offerId}', 'AdminAgencyManagementController@update')->name('UpdateOfferr');
+            Route::put('offer/{offerId}', 'OffersController@update')->name('UpdateOfferr');
 
-            Route::delete('agency/{offerId}','AdminAgencyManagementController@destroy');
+            Route::delete('offer/{offerId}','OffersController@destroy');
 
         });
+        Route::get('/statuss/offer' , 'OffersController@updateStatusOffer')->name('offers.update.status');
 
         
         // Routes For Agency Users Management
-        Route::get('dashboard/agencies/{agencyId}', 'AdminManagementController@showAgency');
+        Route::get('dashboard/agencies/{agencyId}', 'AgenciesController@showAgency');
 
-        Route::get('addagency','AdminManagementController@createAgency')->name('AddAgency');
+        Route::get('addagency','AgenciesController@createAgency')->name('AddAgency');
         
-        Route::post('addagency', 'AdminManagementController@saveAgency');
+        Route::post('addagency', 'AgenciesController@saveAgency');
 
         Route::group(['prefix' => 'dashboard'], function () {
             
-            Route::get('agencies/{agencyId}/edit', 'AdminManagementController@editAgency');
+            Route::get('agencies/{agencyId}/edit', 'AgenciesController@editAgency');
 
-            Route::put('agencies/{agencyId}', 'AdminManagementController@updateAgency')->name('UpdateAgency');
+            Route::put('agencies/{agencyId}', 'AgenciesController@updateAgency')->name('UpdateAgency');
     
-            Route::delete('agencies/{agencyId}','AdminManagementController@destroyAgency');
+            Route::delete('agencies/{agencyId}','AgenciesController@destroyAgency');
         });
 
-        Route::get('/status/agency' , 'AdminManagementController@updateStatusAgency')->name('agencies.update.status');
+        Route::get('/status/agency' , 'AgenciesController@updateStatusAgency')->name('agencies.update.status');
 
-        Route::get('/statuss/offer' , 'AdminAgencyManagementController@updateStatusOffer')->name('offers.update.status');
+        
 
        
 
@@ -89,15 +94,15 @@ Route::namespace('Admin')->group(function(){
         // Routes For Details associated with offers
         Route::group(['prefix' => 'dashboard'], function () {
             
-            Route::get('agency/{offerId}/add','AdminAgencyManagementController@addDetails')->name('add_details');
+            Route::get('offer/{offerId}/add','DetailsController@addDetails')->name('add_details');
 
-            Route::post('agency/{offerId}/add','AdminAgencyManagementController@save');
+            Route::post('offer/{offerId}/add','DetailsController@save');
 
-            Route::get('agency/details/{offerId}','AdminAgencyManagementController@showDetails');
+            Route::get('offer/details/{offerId}','DetailsController@showDetails');
 
-            Route::get('agency/details/{detailId}/edit','AdminAgencyManagementController@editDetails');
+            Route::get('offer/details/{detailId}/edit','DetailsController@editDetails');
 
-            Route::put('agency/details/{detailId}', 'AdminAgencyManagementController@updateDetails')->name('UpdateDetail');
+            Route::put('offer/details/{detailId}', 'DetailsController@updateDetails')->name('UpdateDetail');
         });
         
 

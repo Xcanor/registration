@@ -32,10 +32,10 @@
             <input type="checkbox" data-oid="{{$offer->id}}" name="status" class="js-switch" {{ $offer->status == 1 ? 'checked' : '' }}>
             </td>
             <td>
-                <a href="agency/{{ $offer->id }}">Read</a><br>
-                <a href="agency/{{ $offer->id }}/edit">Update</a><br>
-                <a href="agency/{{ $offer->id }}/add">Add Details</a>  
-               <form method="POST" action="agency/{{ $offer->id }}">
+                <a href="offer/{{ $offer->id }}">Read</a><br>
+                <a href="offer/{{ $offer->id }}/edit">Update</a><br>
+                <a href="offer/{{ $offer->id }}/add">Add Details</a>  
+               <form method="POST" action="offer/{{ $offer->id }}">
                     @csrf
                     @method('DELETE')
                     <input type="submit" class="btn btn-primary" value="Delete">

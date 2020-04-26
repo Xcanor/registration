@@ -40,6 +40,10 @@
                 </a>
                 <a href="/admin/dashboard/agency" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
+                  <p>Agency Managements</p>
+                </a>
+                <a href="/admin/dashboard/offer" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Offer Management</p>
                 </a>
                 <a href="/admin/dashboard/category" class="nav-link active">

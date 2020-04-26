@@ -17,14 +17,19 @@ class AdminHomeController extends Controller
         return view('auth.admin.pages.welcome');
     }
 
-    public function index()
+    public function showUsers()
     {   
         $users = User::all();
-        $agencies = Agency::all();
-        return view('auth.admin.pages.dashboard',compact('users','agencies'));
+        return view('auth.admin.pages.users',compact('users'));
     }
 
-    public function showAgencyPanel()
+    public function showAgencies()
+    {   
+       $agencies = Agency::all();
+        return view('auth.admin.pages.agencies',compact('agencies'));
+    }
+
+    public function showOffers()
     {
         $agencies = Agency::all();
 

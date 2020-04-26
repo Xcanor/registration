@@ -88,7 +88,7 @@
                             <label for="photo" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file" name="photo" class="form-control">
+                                <input type="file" name="photo" class="form-control" required>
 
                                 @error('photo')
                                     <span class="invalid-feedback" role="alert">

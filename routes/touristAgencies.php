@@ -13,27 +13,32 @@ Route::namespace('Agency')->group(function(){
 
         Route::get('dashboard','AgencyHomeController@index');
 
-        Route::get('createoffer','AgencyManagementController@create')->name('createoffer');
+        // Routes for Offers Management
+        Route::get('createoffer','OffersController@create')->name('createoffer');
 
-        Route::post('createoffer','AgencyManagementController@store');
+        Route::post('createoffer','OffersController@store');
         
-        Route::get('dashboard/{offerId}', 'AgencyManagementController@show'); 
+        Route::get('dashboard/{offerId}', 'OffersController@show'); 
 
-        Route::get('dashboard/{offerId}/edit', 'AgencyManagementController@edit');
+        Route::get('dashboard/{offerId}/edit', 'OffersController@edit');
 
-        Route::put('dashboard/{offerId}', 'AgencyManagementController@update')->name('UpdateOffer');
+        Route::put('dashboard/{offerId}', 'OffersController@update')->name('UpdateOffer');
 
-        Route::delete('dashboard/{offerId}','AgencyManagementController@destroy');
+        Route::delete('dashboard/{offerId}','OffersController@destroy');
 
-        Route::get('dashboard/{offerId}/add','AgencyManagementController@add')->name('add_detail');
 
-        Route::post('dashboard/{offerId}/add','AgencyManagementController@save');
 
-        Route::get('dashboard/details/{offerId}','AgencyManagementController@showdetails')->name('show_detail');
+        // Routes for Offer Details Management
 
-        Route::get('dashboard/details/{detailId}/edit','AgencyManagementController@editDetails');
+        Route::get('dashboard/{offerId}/add','OffersDetailController@add')->name('add_detail');
 
-        Route::put('dashboard/details/{detailId}', 'AgencyManagementController@updateDetails')->name('UpdateDetails');
+        Route::post('dashboard/{offerId}/add','OffersDetailController@save');
+
+        Route::get('dashboard/details/{offerId}','OffersDetailController@showdetails')->name('show_detail');
+
+        Route::get('dashboard/details/{detailId}/edit','OffersDetailController@editDetails');
+
+        Route::put('dashboard/details/{detailId}', 'OffersDetailController@updateDetails')->name('UpdateDetails');
 
     
 

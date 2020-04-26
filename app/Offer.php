@@ -22,7 +22,7 @@ class Offer extends Model
 
     public function details()
     {
-        return $this->hasMany(Detail::class);
+        return $this->hasMany(OfferDetails::class);
     }
 
     public function images()

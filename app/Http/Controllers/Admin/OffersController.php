@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Offer;
 use App\Agency;
-use App\Detail;
+use App\OfferDetails;
 use App\Photo;
 use App\Category;
 use Image;
 
-class AdminAgencyManagementController extends Controller
+class OffersController extends Controller
 {
     public function viewOffer($offerId)
     {
@@ -37,8 +37,9 @@ class AdminAgencyManagementController extends Controller
             'end_date' => 'required',
             'rooms' => 'required|numeric',
             'status' => 'required',
-            'agency_price' => 'required',
-            'user_price' => 'required',
+            'agency_price' => 'required|numeric',
+            'user_price' => 'required|numeric',
+            'category' => 'required'
         ]);
         
         $offer =  Offer::create([
@@ -77,7 +78,7 @@ class AdminAgencyManagementController extends Controller
         $offer->categories()->attach($category);
 
 
-        return redirect('admin/dashboard/agency');
+        return redirect('admin/dashboard/offer');
     }
 
     public function edit($offerId)
@@ -121,7 +122,7 @@ class AdminAgencyManagementController extends Controller
         $offer->categories()->sync($category);
         $offer -> save();
 
-        return redirect('admin/dashboard/agency');
+        return redirect('admin/dashboard/offer');
     }
 
     public function destroy($offerId)
@@ -131,67 +132,6 @@ class AdminAgencyManagementController extends Controller
         return redirect()->back();
 
     }
-
-    public function addDetails($offerId)
-    {
-        $offer = Offer::findOrFail($offerId);
-        return view('auth.admin.pages.create-details',compact('offer'));
-    }
-
-    public function save(Request $request)
-    {    
-        $offer = Offer::findOrFail($request->offerId);
-
-        $detail = Detail::create([
-            'offer_id' => $offer->id,
-            'from' => $request['from'],
-            'to' => $request['to'],
-            'departial_time' => $request['departial_time'],
-            'arrival_time' => $request['arrival_time'],
-            'ticket_number' => $request['ticket_number'],
-            'transportation' => $request['transportation'],
-        ]);
-
-        return redirect('admin/dashboard/agency');
-    }
-
-    public function showDetails($offerId)
-    {
-        $offer = Offer::findOrFail($offerId);
-        return view('auth.admin.pages.show-details', compact('offer'));
-    }
-
-    public function editDetails($detailId)
-    {
-        $detail = Detail::findOrFail($detailId);
-        return view('auth.admin.pages.edit-details', compact('detail'));
-    }
-
-    public function updateDetails(Request $request)
-    {
-        $detail = Detail::findOrFail($request->detailId);
-
-        $this->validate($request, [
-            'from' => 'required',
-            'to' => 'required',
-            'departial_time' => 'required',
-            'arrival_time' => 'required',
-            'ticket_number' => 'required|numeric',
-            'transportation' => 'required',
-        ]);
-        // save new values
-        $detail -> from = $request -> from;
-        $detail -> to = $request -> to;
-        $detail -> departial_time = $request -> departial_time;
-        $detail -> arrival_time = $request -> arrival_time;
-        $detail -> ticket_number = $request -> ticket_number;
-        $detail -> transportation = $request -> transportation;
-        $detail -> save();
-
-
-        return redirect('admin/dashboard/agency');
-    }
-
     public function updateStatusOffer(Request $request)
     {
         $offer = Offer::findOrFail($request->offer_id);
