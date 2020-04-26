@@ -17,13 +17,11 @@
           <tr>
             <td>{{ $offer->id }}</td>
             <td>{{ $offer->name }}</td>
-
-            @foreach($offer->images as $image)
             <td>
+            @foreach($offer->images as $image)
             <img src="/uploads/images/{{ $image->imagename }}" width="100" height="100" alt="">
-            </td>
             @endforeach
-
+            </td>
             <td>
             <input type="checkbox" data-id="$offer->id" name="status" class="js-switch" {{ $offer->status == 1 ? 'checked' : '' }}>
             </td>

@@ -105,6 +105,7 @@ class OffersController extends Controller
             'status' => 'required',
             'agency_price' => 'required',
             'user_price' => 'required',
+            'category' => 'required'
         ]);
         // save new values
         $offer -> agency_id = $request -> agency_id;

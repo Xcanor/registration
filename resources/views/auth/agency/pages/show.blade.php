@@ -22,9 +22,11 @@
           <tr>
             <td>{{ $offer->id }}</td>
             <td>{{ $offer->name }}</td>
+            <td>
             @foreach($offer->categories as $category)
-            <td>{{$category->name}}</td>
+            {{$category->name}}
             @endforeach
+            </td>
             <td>{{ date('l , F d , Y h:i A', strtotime($offer->start_date)) }}</td>
             <td>{{ date('l , F d , Y h:i A', strtotime($offer->end_date)) }}</td>
             <td>{{ $offer->rooms }}</td>

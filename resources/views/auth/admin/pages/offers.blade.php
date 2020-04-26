@@ -19,14 +19,18 @@
           <tr>
             <td>{{ $offer->id }}</td>
             <td>{{ $offer->name }}</td>
-            @foreach($offer->categories as $category)
-            <td>{{ $category->name }}</td>
-            @endforeach
-            @foreach($offer->images as $image)
             <td>
-            <img src="/uploads/images/{{ $image->imagename }}" width="100" height="100" alt="">
-            </td>
+            @foreach($offer->categories as $category)
+            {{ $category->name }}
             @endforeach
+            </td>
+            
+            <td>
+            @foreach($offer->images as $image)
+            <img src="/uploads/images/{{ $image->imagename }}" width="100" height="100" alt="">
+            @endforeach
+            </td>
+            
 
             <td>
             <input type="checkbox" data-oid="{{$offer->id}}" name="status" class="js-switch" {{ $offer->status == 1 ? 'checked' : '' }}>
