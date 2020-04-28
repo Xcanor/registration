@@ -88,7 +88,7 @@
                             <label for="agency_price" class="col-md-4 col-form-label text-md-right">{{ __('Agency Price') }}</label>
 
                             <div class="col-md-6">
-                                <input id="agency_price" type="text" class="form-control @error('agency_price') is-invalid @enderror" name="agency_price" value="{{$offer->agency_price}}" required autocomplete="agency_price">
+                                <input id="agency_price" type="number" class="form-control @error('agency_price') is-invalid @enderror" name="agency_price" value="{{$offer->agency_price}}" required autocomplete="agency_price">
 
                                 @error('agency_price')
                                     <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                             <label for="user_price" class="col-md-4 col-form-label text-md-right">{{ __('User Price') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user_price" type="text" class="form-control" name="user_price" value="{{$offer->user_price}}" required autocomplete="user_price">
+                                <input id="user_price" type="number" class="form-control" name="user_price" value="{{$offer->user_price}}" required autocomplete="user_price">
 
                                 @error('user_price')
                                     <span class="invalid-feedback" role="alert">
