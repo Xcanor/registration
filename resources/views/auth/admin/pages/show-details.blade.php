@@ -23,7 +23,14 @@
             <td>{{ date('l , F d , Y h:i A', strtotime($detail->arrival_time)) }}</td>
             <td>{{ $detail->ticket_number }}</td>
             <td>{{ $detail->transportation }}</td>
-            <td><a href="{{ $detail->id }}/edit">Edit</a><br></td>
+            <td>
+            <a href="{{ $detail->id }}/edit">Edit</a><br>
+            <form method="POST" action="{{ $detail->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                </form>
+            </td>
           </tr>
           @endforeach
         </tbody>

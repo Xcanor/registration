@@ -57,6 +57,19 @@
               }
           });
         });
+        $('.js-switch').change(function () {
+          let available = $(this).prop('checked') === true ? 1 : 0; // checked property in the input toggle button
+          let offerId = $(this).data('oid');   
+          $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('offers.update.status') }}',
+            data: {'status': available, 'offer_id': offerId},
+            success: function (data) {
+              console.log(data.message);
+              }
+          });
+        });
       });
 </script>
 

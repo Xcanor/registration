@@ -30,4 +30,9 @@ class AgencyLoginController extends Controller
         }
         return back();
     }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('agency/login');
+    }
 }

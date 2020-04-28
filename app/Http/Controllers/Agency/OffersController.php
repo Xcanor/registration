@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Agency;
-
+use App\Services\OfferService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\OfferRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Offer;
 use App\Agency;
@@ -14,68 +15,28 @@ use Image;
 
 class OffersController extends Controller
 {
+    protected $offerservice;
+
+    public function __construct(OfferService $offerservice)
+	{
+		$this->offerservice = $offerservice;
+    }
+    
     public function create()
     {   
         $categories = Category::all();
         return view('auth.agency.pages.create',compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(OfferRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'rooms' => 'required|numeric',
-            'status' => 'required',
-            'agency_price' => 'required|numeric',
-            'user_price' => 'required|numeric',
-        ]);
-        
-        $user = Auth::guard('agency')->user();
-        $user_id = $user->id;
-
-        $offer =  Offer::create([
-            'agency_id' => $user_id,
-            'name' => $request['name'],
-            'start_date' => $request['start_date'],
-            'end_date' => $request['end_date'],
-            'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'rooms' => $request['rooms'],
-            'status' => $request['status'],
-            'agency_price' => $request['agency_price'],
-            'user_price' => $request['user_price'],
-        ]);
-
-        $offer_id = Offer::latest()->first()->id;
-
-        if($request->hasFile('images'))
-        {   
-            foreach( $request->file('images') as $image ) {
-                    
-                $filename = time() . '.' . $image->getClientOriginalExtension();
-                Image::make($image)->resize(300, 300)->save( public_path('/uploads/images/' . $filename ));
-
-                Photo::create([
-                'offer_id' => $offer_id,
-                'imagename' => $filename
-                ]);
-            }
-        }
-
-        $categories = $request['category'];
-        $category = Category::find($categories);
-        $offer->categories()->attach($category);
-       
+        $this->offerservice->create($request);
         return redirect('agency/dashboard');
     }
 
-  
-
     public function show($offerId)
     {
-        $offer = Offer::findOrFail($offerId);
+        $offer = $this->offerservice->read($offerId);
         $categories = Category::all();
         return view('auth.agency.pages.show', compact('offer','categories'));
     }
@@ -88,43 +49,24 @@ class OffersController extends Controller
 
     }
 
-    
-    public function update(Request $request)
+    public function update(OfferRequest $request)
     {
-        
-        $offer = Offer::findOrFail($request->offerId);
-        
-        $this->validate($request, [
-            'name' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'rooms' => 'required|numeric',
-            'status' => 'required',
-            'agency_price' => 'required|numeric',
-            'user_price' => 'required|numeric',
-        ]);
-        // save new values
-        $offer -> name = $request -> name;
-        $offer -> start_date = $request -> start_date;
-        $offer -> end_date = $request -> end_date;
-        $offer -> rooms = $request -> rooms;
-        $offer -> status = $request -> status;
-        $offer -> agency_price = $request -> agency_price;
-        $offer -> user_price = $request -> user_price;
-
-        $categories = $request['category'];
-        $category = Category::find($categories);
-        $offer->categories()->sync($category);
-        $offer -> save();
-
+        $this->offerservice->update($request);
         return redirect('/agency/dashboard');
     }
 
     public function destroy($offerId)
     {
-        $offer = Offer::findOrFail($offerId); //primary Key
-        $offer->delete();
+        $this->offerservice->delete($offerId);
         return redirect()->back();
+    }
 
+    public function updateStatusOffer(Request $request)
+    {
+        $offer = Offer::findOrFail($request->offer_id);
+        $offer->status = $request->status;
+        $offer->save();
+
+        return response()->json(['message' => 'Offer status updated successfully.']);
     }
 }

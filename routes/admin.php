@@ -12,6 +12,8 @@ Route::namespace('Admin')->group(function(){
 
     Route::post('login', 'AdminLoginController@Login');
 
+    Route::get('logout', 'AdminLoginController@logout')->name('Adminlogout');
+
 
     // Routes Where admin will be able to access them if he authenticated 
 
@@ -103,6 +105,8 @@ Route::namespace('Admin')->group(function(){
             Route::get('offer/details/{detailId}/edit','DetailsController@editDetails');
 
             Route::put('offer/details/{detailId}', 'DetailsController@updateDetails')->name('UpdateDetail');
+
+            Route::delete('offer/details/{detailId}','DetailsController@destroy');
         });
         
 

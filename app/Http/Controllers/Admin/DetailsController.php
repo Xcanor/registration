@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Services\OfferDetailsService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\OfferDetailsRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Offer;
 use App\Agency;
@@ -18,51 +19,28 @@ use DatePeriod;
 
 class DetailsController extends Controller
 {
+    protected $offerdetailservice;
+
+    public function __construct(OfferDetailsService $offerdetailservice)
+	{
+		$this->offerdetailservice = $offerdetailservice;
+    }
+
     public function addDetails($offerId)
     {
         $offer = Offer::findOrFail($offerId);
         return view('auth.admin.pages.create-details',compact('offer'));
     }
 
-    public function save(Request $request)
+    public function save(OfferDetailsRequest $request)
     {    
-        $offer = Offer::findOrFail($request->offerId);
-        // array of date-time 
-        $start_offer = new DateTime($offer->start_date); 
-        $end_offer = new DateTime($offer->end_date); 
-        $interval = DateInterval::createFromDateString('1 day');
-        $period = new DatePeriod($start_offer, $interval, $end_offer);
-
-        $dates = array();
-        $begin = date('Y-m-d',strtotime($request['departial_time']));
-        $end = date('Y-m-d',strtotime($request['arrival_time']));
-
-        foreach($period as $dt)
-        {   
-            array_push( $dates,$dt->format('Y-m-d'));
-        }
-
-        if(in_array($begin,$dates) && in_array($end,$dates))
-        {
-            $detail = OfferDetails::create([
-                'offer_id' => $offer->id,
-                'from' => $request['from'],
-                'to' => $request['to'],
-                'departial_time' => $request['departial_time'],
-                'arrival_time' => $request['arrival_time'],
-                'ticket_number' => $request['ticket_number'],
-                'transportation' => $request['transportation'],
-            ]);
-            return redirect('admin/dashboard/offer');
-        }
-        return "You have to Enter Validate Date !! ";
-        
-        
+        $this->offerdetailservice->create($request);
+        return redirect('admin/dashboard/offer');
     }
 
     public function showDetails($offerId)
     {
-        $offer = Offer::findOrFail($offerId);
+        $offer = $this->offerdetailservice->read($offerId);
         return view('auth.admin.pages.show-details', compact('offer'));
     }
 
@@ -72,29 +50,17 @@ class DetailsController extends Controller
         return view('auth.admin.pages.edit-details', compact('detail'));
     }
 
-    public function updateDetails(Request $request)
+    public function updateDetails(OfferDetailsRequest $request)
     {
-        $detail = OfferDetails::findOrFail($request->detailId);
-
-        $this->validate($request, [
-            'from' => 'required',
-            'to' => 'required',
-            'departial_time' => 'required',
-            'arrival_time' => 'required',
-            'ticket_number' => 'required|numeric',
-            'transportation' => 'required',
-        ]);
-        // save new values
-        $detail -> from = $request -> from;
-        $detail -> to = $request -> to;
-        $detail -> departial_time = $request -> departial_time;
-        $detail -> arrival_time = $request -> arrival_time;
-        $detail -> ticket_number = $request -> ticket_number;
-        $detail -> transportation = $request -> transportation;
-        $detail -> save();
-
-
+        $this->offerdetailservice->update($request);
         return redirect('admin/dashboard/offer');
+    }
+
+    public function destroy($detailId)
+    {
+        $this->offerdetailservice->delete($detailId);
+        return redirect()->back();
+
     }
 
 }

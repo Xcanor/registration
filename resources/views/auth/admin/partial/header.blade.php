@@ -6,6 +6,7 @@
             <button class="btn btn-success" type="submit" onclick="location.href='{{ url('admin/createUser') }}'">Create User</button>
             <button class="btn btn-success" type="submit" onclick="location.href='{{ url('admin/createoffer') }}'">Create Offer</button>
             <button class="btn btn-success" type="submit" onclick="location.href='{{ url('admin/addagency') }}'">Create Agency User</button>
+            <a href="{{route('Adminlogout')}}">Logout</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
 </div><!-- /.container-fluid -->      

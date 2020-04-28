@@ -23,7 +23,7 @@
             @endforeach
             </td>
             <td>
-            <input type="checkbox" data-id="$offer->id" name="status" class="js-switch" {{ $offer->status == 1 ? 'checked' : '' }}>
+            <input type="checkbox" data-oid="{{$offer->id}}" name="status" class="js-switch" {{ $offer->status == 1 ? 'checked' : '' }}>
             </td>
             <td>
                 <a href="dashboard/{{ $offer->id }}">Read</a><br>

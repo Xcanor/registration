@@ -8,6 +8,8 @@ Route::namespace('Agency')->group(function(){
     
     Route::post('login', 'AgencyLoginController@Login');
 
+    Route::get('logout', 'AgencyLoginController@logout')->name('Agencylogout');
+
 
     Route::group(['middleware' => ['agency_auth']], function () {
 
@@ -26,6 +28,8 @@ Route::namespace('Agency')->group(function(){
 
         Route::delete('dashboard/{offerId}','OffersController@destroy');
 
+        Route::get('/status/offer' , 'OffersController@updateStatusOffer')->name('offers.update.status');
+
 
 
         // Routes for Offer Details Management
@@ -39,6 +43,8 @@ Route::namespace('Agency')->group(function(){
         Route::get('dashboard/details/{detailId}/edit','OffersDetailController@editDetails');
 
         Route::put('dashboard/details/{detailId}', 'OffersDetailController@updateDetails')->name('UpdateDetails');
+
+        Route::delete('dashboard/details/{detailId}','OffersDetailController@destroy');
 
     
 
