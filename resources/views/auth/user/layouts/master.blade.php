@@ -12,6 +12,7 @@
     @include('auth.user.partial.styles')
   <script src="{{asset('bower_components/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+  {!! NoCaptcha::renderJs() !!}
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

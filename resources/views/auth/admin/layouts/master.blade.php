@@ -86,6 +86,22 @@
           });
         });
 
+        $('.target').click(function () {
+          let status = 1;
+          let messageId = $(this).data('mid');   
+          $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('message.update.status') }}',
+            data: {'status': status, 'message_id': messageId},
+            success: function (data) {
+              console.log(data.message);
+              }
+          });
+        });
+
+
+
       });
 </script>
 

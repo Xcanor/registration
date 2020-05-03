@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Agency;
 use App\OfferDetails;
 use App\Photo;
@@ -99,41 +100,53 @@ class OfferService
 	{
         if(request()->is("agency*"))
         {
-            $offer = Offer::findOrFail($request->offerId);
-        
-            // save new values
-            $offer -> name = $request -> name;
-            $offer -> start_date = $request -> start_date;
-            $offer -> end_date = $request -> end_date;
-            $offer -> rooms = $request -> rooms;
-            $offer -> status = $request -> status;
-            $offer -> agency_price = $request -> agency_price;
-            $offer -> user_price = $request -> user_price;
+            DB::transaction(function () use($request){
+                DB::table('offers')
+                ->where('id', $request->offerId)
+                ->lockForUpdate()
+                ->update([
+                    'name' => $request -> name,
+                    'start_date' => $request -> start_date,
+                    'end_date' => $request -> end_date,
+                    'rooms' => $request -> rooms,
+                    'status' => $request -> status,
+                    'agency_price' => $request -> agency_price,
+                    'user_price' => $request -> user_price
+                    ]);
+                
+                $offer = Offer::findOrFail($request->offerId);
+                $categories = $request['category'];
+                $category = Category::find($categories);
+                $offer->categories()->sync($category);
+                $offer->save();
 
-            $categories = $request['category'];
-            $category = Category::find($categories);
-            $offer->categories()->sync($category);
-            $offer -> save();
-
+            },5);
         }
         else
         {
-            $offer = Offer::findOrFail($request->offerId);
-
-            $offer -> agency_id = $request -> agency_id;
-            $offer -> name = $request -> name;
-            $offer -> start_date = $request -> start_date;
-            $offer -> end_date = $request -> end_date;
-            $offer -> rooms = $request -> rooms;
-            $offer -> status = $request -> status;
-            $offer -> agency_price = $request -> agency_price;
-            $offer -> user_price = $request -> user_price;
+            DB::transaction(function () use($request){
+                DB::table('offers')
+                ->where('id', $request->offerId)
+                ->lockForUpdate()
+                ->update([
+                    'agency_id' => $request -> agency_id,
+                    'name' => $request -> name,
+                    'start_date' => $request -> start_date,
+                    'end_date' => $request -> end_date,
+                    'rooms' => $request -> rooms,
+                    'status' => $request -> status,
+                    'agency_price' => $request -> agency_price,
+                    'user_price' => $request -> user_price
+                    ]);
+                
+                $offer = Offer::findOrFail($request->offerId);
+                $categories = $request['category'];
+                $category = Category::find($categories);
+                $offer->categories()->sync($category);
+                $offer->save();
+            },3);
             
             // Update Categories that associated with offers
-            $categories = $request['category'];
-            $category = Category::find($categories);
-            $offer->categories()->sync($category);
-            $offer -> save();
 
         }
        

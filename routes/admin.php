@@ -88,10 +88,6 @@ Route::namespace('Admin')->group(function(){
 
         Route::get('/status/agency' , 'AgenciesController@updateStatusAgency')->name('agencies.update.status');
 
-        
-
-       
-
 
         // Routes For Details associated with offers
         Route::group(['prefix' => 'dashboard'], function () {
@@ -108,6 +104,15 @@ Route::namespace('Admin')->group(function(){
 
             Route::delete('offer/details/{detailId}','DetailsController@destroy');
         });
+
+        Route::group(['prefix' => 'dashboard'],function () {
+
+            Route::get('support', 'SupportController@index');
+
+            Route::get('details/{detailId}', 'SupportController@show');
+        });
+
+        Route::get('/status/message' , 'SupportController@messageUpdateStatus')->name('message.update.status');
         
 
         

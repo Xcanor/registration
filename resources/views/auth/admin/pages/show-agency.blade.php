@@ -32,7 +32,9 @@
               Block
             </td>
             @endif
-            <td>{{ $agency->photo }}</td>
+            <td>
+              <img src="uploads/photos/{{ $agency->photo }}" alt="profile">
+            </td>
             <td>{{ $agency->country }}</td>
           </tr>
         </tbody>

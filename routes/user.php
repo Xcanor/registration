@@ -10,9 +10,12 @@ Auth::Routes();
 
 Route::namespace('User')->group(function(){
     
+   
 
     Route::group(['prefix' => 'user'],function(){
 
+        Route::get('logout', 'UserLoginController@logout')->name('Userlogout');
+        
         Route::group(['middleware' => ['user_auth']], function () {
 
             // Routes Where user will be able to access them if he authenticated 
@@ -39,6 +42,10 @@ Route::namespace('User')->group(function(){
             Route::get('offers', 'UserHomeController@showOffers');
 
             Route::get('details/{offerId}', 'UserHomeController@showDetails');
+
+            Route::get('contact-us', 'SupportController@create');
+
+            Route::post('contact-us', 'SupportController@send')->name('Contact-us');
           
         });
     

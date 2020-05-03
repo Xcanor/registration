@@ -69,7 +69,7 @@ class AdminManagementController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email'.$user->id,
             'telephone' => 'required',
             'gender' => 'nullable',
             'date_of_birth' => 'nullable',

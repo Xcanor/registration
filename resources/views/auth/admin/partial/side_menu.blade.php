@@ -50,6 +50,10 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Category Management</p>
                 </a>
+                <a href="/admin/dashboard/support" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Support Management</p>
+                </a>
               </li>
             </ul>
           </li>

@@ -64,7 +64,7 @@ class AgenciesController extends Controller
 
         return redirect('admin/dashboard/agency');
     }
-
+    
     public function editAgency($agencyId)
     {
         $agency = Agency::findOrFail($agencyId); //primary Key
@@ -72,7 +72,7 @@ class AgenciesController extends Controller
 
     }
 
-    // admin update user's data
+    // Update Agency data
     public function updateAgency(Request $request)
     {
         // get data of old User
@@ -80,7 +80,7 @@ class AgenciesController extends Controller
         // validate updated data
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:agencies,email,'.$agency->id,
             'phone' => 'required|numeric',
             'address' => 'required',
             'status' => 'required',
@@ -100,7 +100,7 @@ class AgenciesController extends Controller
         return redirect('admin/dashboard/agency');
     }
 
-
+    // Delete Agency User
     public function destroyAgency($agencyId)
     {
         $agency = Agency::findOrFail($agencyId); //primary Key
@@ -109,6 +109,7 @@ class AgenciesController extends Controller
 
     }
 
+    // Change the status of the agency
     public function updateStatusAgency(Request $request)
     {
         $agency = Agency::findOrFail($request->agency_id);
