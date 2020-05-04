@@ -39,16 +39,16 @@ class CategoryController extends Controller
 
     }
 
-    // admin update user's data
+    
     public function update(Request $request)
     {
-        // get data of old User
+        
         $category = Category::findOrFail($request->categoryId);
-        // validate updated data
+        
         $this->validate($request, [
             'name' => 'required',
         ]);
-        // save new values
+       
         $category -> name = $request -> name;
         $category -> save();
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
     public function destroy($categoryId)
     {
-        $category = Category::findOrFail($categoryId); //primary Key
+        $category = Category::findOrFail($categoryId);
         $category->delete();
         return redirect()->back();
 

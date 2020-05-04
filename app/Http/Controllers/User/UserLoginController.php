@@ -67,8 +67,7 @@ class UserLoginController extends Controller
         return back();
     }
 
-    public function username()
-    
+    public function username() 
     {
         $user_identifier = request()->input('telephone');
 

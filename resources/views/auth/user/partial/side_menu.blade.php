@@ -12,10 +12,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('bower_components/admin-lte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->first_name}}</a>
+          <a href="profile" class="d-block">{{Auth::user()->first_name}}</a>
         </div>
       </div>
     </div>

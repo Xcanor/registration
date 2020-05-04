@@ -19,11 +19,11 @@
 
            @if($user_request->status == 1)
            <td>
-              <i class="far fa-envelope-open fa-2x"></i>
+              <i class="fas fa-envelope-open fa-2x"></i>
             </td>
             @else
             <td>
-            <i class="far fa-envelope fa-2x"></i>
+            <i class="fas fa-envelope fa-2x"></i>
             </td>
             @endif
            <td>
