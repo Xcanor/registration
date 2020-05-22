@@ -19,7 +19,11 @@ Route::namespace('Categories')->group(function(){
 
         Route::put('category/{categoryId}', 'CategoryController@update')->name('UpdateCategory');
 
-        Route::delete('category/{categoryId}','CategoryController@destroy');
+        Route::get('category/{categoryId}/add', 'CategoryController@addItem')->name('AddItem');
+
+        Route::post('category/{categoryId}/add', 'CategoryController@storeItem');
+
+        Route::delete('category/{categoryId}','CategoryController@destroy')->name('delete.category');
     });
     
 

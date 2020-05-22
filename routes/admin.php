@@ -113,9 +113,6 @@ Route::namespace('Admin')->group(function(){
         });
 
         Route::get('/status/message' , 'SupportController@messageUpdateStatus')->name('message.update.status');
-        
-
-        
 
     });
 

@@ -8,6 +8,7 @@
   @include('auth.category.partial.title') 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Styles -->
   @include('auth.category.partial.styles')
@@ -37,23 +38,24 @@
 <!-- Footer -->
 
 <script>
-  let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-
-  elems.forEach(function(html) {
-    let switchery = new Switchery(html,  { size: 'small' });
-      });
-
       $(document).ready(function(){
-        $('.js-switch').change(function () {
-          let status = $(this).prop('checked') === true ? 1 : 0; // checked property in the input toggle button
-          let userId = $(this).data('id');   
+
+        $('.delete').click(function () {
+          let categoryId = $(this).data('id');   
+          var token = $("meta[name='csrf-token']").attr("content");
+          var element = this;
           $.ajax({
-            type: "GET",
+            type: "DELETE",
             dataType: "json",
-            url: '{{ route('users.update.status') }}',
-            data: {'status': status, 'user_id': userId},
-            success: function (data) {
-              console.log(data.message);
+            url: 'category/'+categoryId,
+            data: {'category_id': categoryId ,"_token": token},
+            success: function () {
+              $(element).closest("tr").remove();
+              alert("Record Deleted");
+              },
+              error:function()
+              {
+                alert("You must delete childs first !! ");
               }
           });
         });

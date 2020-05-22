@@ -10,13 +10,15 @@ class CategoryController extends Controller
 {
     public function index()
     {   
-        $categories = Category::all();
+        //$categories = Category::with('childs')->whereNull('parent_id')->get();
+        $categories = Category::with('childs')->get();
         return view('auth.category.pages.dashboard',compact('categories'));
     }
 
     public function create()
     {
-        return view('auth.category.pages.create');
+        $allCategories = Category::all();
+        return view('auth.category.pages.create',compact('allCategories'));
     }
 
     public function store(Request $request)
@@ -27,6 +29,7 @@ class CategoryController extends Controller
         
         $category =  Category::create([
             'name' => $request['name'],
+            'parent_id' =>  $request['parent_id']
         ]);
 
         return redirect('admin/dashboard/category');
@@ -35,7 +38,8 @@ class CategoryController extends Controller
     public function edit($categoryId)
     {
         $category = Category::findOrFail($categoryId); //primary Key
-        return view('auth.category.pages.edit',compact('category'));
+        $allCategories = Category::all();
+        return view('auth.category.pages.edit',compact('category','allCategories'));
 
     }
 
@@ -50,6 +54,7 @@ class CategoryController extends Controller
         ]);
        
         $category -> name = $request -> name;
+        $category -> parent_id = $request -> parent_id;
         $category -> save();
 
         return redirect('/admin/dashboard/category');
@@ -61,11 +66,10 @@ class CategoryController extends Controller
         return view('auth.category.pages.show', compact('category'));
     }
 
-    public function destroy($categoryId)
+    public function destroy(Request $request)
     {
-        $category = Category::findOrFail($categoryId);
+        $category = Category::findOrFail($request->category_id);
         $category->delete();
-        return redirect()->back();
-
-    }
+        return response()->json(['message' => 'Record deleted successfully!']);
+    } 
 }

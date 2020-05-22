@@ -13,19 +13,13 @@
         <tbody>
           @foreach ($categories as $category)
           <tr>
-            <td>{{ $category->id }}</td>
-            <td>{{ $category->name }}</td>
-
-            <td>
-                <a href="category/{{ $category->id }}">Read</a><br>
-                <a href="category/{{ $category->id }}/edit">Update</a><br>
-               <form method="POST" action="category/{{ $category->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" class="btn btn-primary" value="Delete">
-                </form>
-               
-            </td>
+          <td>{{ $category->id }}</td>
+          <td>{{ $category->name }}</td>
+          <td>
+              <a href="category/{{ $category->id }}">Read</a><br>
+              <a href="category/{{ $category->id }}/edit">Update</a><br>
+              <button data-id="{{ $category->id }}" class="btn btn-primary delete" value="Delete">Delete</button>
+          </td>
           </tr>
           @endforeach
         </tbody>

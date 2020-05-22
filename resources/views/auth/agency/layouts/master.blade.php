@@ -54,6 +54,7 @@
             data: {'status': status, 'user_id': userId},
             success: function (data) {
               console.log(data.message);
+              location.reload();
               }
           });
         });
@@ -67,6 +68,7 @@
             data: {'status': available, 'offer_id': offerId},
             success: function (data) {
               console.log(data.message);
+              location.reload();
               }
           });
         });
